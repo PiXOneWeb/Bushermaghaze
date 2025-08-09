@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>دیوار مغازه بوشهر</title>
+<style>
+  body {
+    font-family: "Vazir", sans-serif, Tahoma;
+    direction: rtl;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  header {
+    background: #ff5b00;
+    padding: 16px;
+    color: white;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 700;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  }
+  .top-bar {
+    padding: 10px 12px;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .search-box {
+    flex: 1;
+  }
+  .search-box input {
+    width: 90%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1.1em;
+    outline-offset: 2px;
+    outline-color: #ff5b00;
+    transition: outline-color 0.3s ease;
+  }
+  .search-box input:focus {
+    outline-color: #e04800;
+  }
+  button#showFormBtn {
+    background: #ff5b00;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1em;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+  }
+  button#showFormBtn:hover {
+    background: #e04800;
+  }
+  .ad-list {
+    padding: 12px 10px 70px;
+    min-height: 200px;
+  }
+  .warning {
+    background: #ffe6e6;
+    color: #b80000;
+    padding: 14px 10px;
+    font-size: 0.95em;
+    text-align: center;
+    line-height: 1.5;
+    border-top: 3px solid #ff5b00;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(255, 91, 0, 0.25);
+    z-index: 20;
+  }
+  form#adForm {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+    padding: 16px 20px;
+    margin: 12px 10px;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+  form#adForm label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+  }
+  form#adForm input[type="text"],
+  form#adForm input[type="tel"],
+  form#adForm input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+  }
+  form#adForm input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: #444;
+  }
+  form#adForm button {
+    background: #ff5b00;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  form#adForm button:hover {
+    background: #e04800;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    max-width: 300px;
+    width: 90%;
+  }
+  .checkmark {
+    font-size: 40px;
+    color: green;
+    margin-bottom: 10px;
+  }
+  .modal-phone {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #ff5b00;
+    margin-top: 5px;
+  }
+  .modal-content button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: #ff5b00;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+  }
+  .modal-content button:hover {
+    background: #e04800;
+  }
+</style>
+</head>
+<body>
+
+<header>بوشهر مغازه</header>
+
+<div class="top-bar">
+  <div class="search-box">
+    <input type="text" id="search" placeholder="جستجو مغازه..." autocomplete="off" />
+  </div>
+  <button id="showFormBtn">ثبت مغازه</button>
+</div>
+
+<form id="adForm">
+  <label for="title">عنوان آگهی</label>
+  <input type="text" id="title" required />
+
+  <label for="phone">شماره تماس:</label>
+  <input type="tel" id="phone" pattern="[0-9]{11}" required />
+
+  <div class="checkbox-container">
+    <input type="checkbox" id="isRealEstate" />
+    <label for="isRealEstate">شبانه‌روزی هستم</label>
+  </div>
+
+  <label for="image">انتخاب عکس:</label>
+  <input type="file" id="image" accept="image/*" />
+
+  <button type="submit">ارسال مغازه</button>
+</form>
+
+<div class="ad-list" id="adList"></div>
+
+<div class="warning">
+  ⚠ این برنامه فقط برای آگهی مغازه‌ها و مکانیکی‌ها ساخته شده.<br />
+  لطفاً آگهی دیگری غیر از مغازه ثبت نکنید.<br />
+  در غیر این صورت مجبور می‌شویم حساب شما را مسدود کنیم.
+</div>
+
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <div class="checkmark">✔</div>
+    <p>با شماره زیر تماس بگیرید</p>
+    <p class="modal-phone" id="modalPhone"></p>
+    <button id="closeModalBtn">بستن</button>
+  </div>
+</div>
+
+<script>
+  const showFormBtn = document.getElementById("showFormBtn");
+  const adForm = document.getElementById("adForm");
+
+  showFormBtn.addEventListener("click", () => {
+    adForm.style.display = adForm.style.display === "flex" ? "none" : "flex";
+    showFormBtn.textContent = adForm.style.display === "flex" ? "بستن فرم" : "ثبت مغازه";
+  });
+
+  adForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const phone = document.getElementById("phone").value.trim();
+    if (!phone) {
+      alert("شماره تماس را وارد کنید");
+      return;
+    }
+
+    document.getElementById("modalPhone").textContent = phone;
+    document.getElementById("successModal").style.display = "flex";
+
+    adForm.reset();
+    adForm.style.display = "none";
+    showFormBtn.textContent = "ثبت مغازه";
+  });
+
+  document.getElementById("closeModalBtn").addEventListener("click", () => {
+    document.getElementById("successModal").style.display = "none";
+  });
+</script>
+
+</body>
+</html>
