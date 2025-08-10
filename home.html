@@ -218,7 +218,7 @@
   <div class="modal-content">
     <div class="checkmark">✔</div>
     <p>با شماره زیر تماس بگیرید</p>
-    <p class="modal-phone" id="modalPhone">09927056605</p>
+    <p class="modal-phone" id="modalPhone"></p>
     <button id="closeModalBtn">بستن</button>
   </div>
 </div>
@@ -235,13 +235,8 @@
   adForm.addEventListener("submit", e => {
     e.preventDefault();
 
-    const phone = document.getElementById("phone").value.trim();
-    if (!phone) {
-      alert("شماره تماس را وارد کنید");
-      return;
-    }
-
-    document.getElementById("modalPhone").textContent = phone;
+    // حتی اگر کاربر شماره خودش رو وارد کنه، شماره ثابت شما نمایش داده میشه
+    document.getElementById("modalPhone").textContent = "09927056605";
     document.getElementById("successModal").style.display = "flex";
 
     adForm.reset();
@@ -256,4 +251,3 @@
 
 </body>
 </html>
-
